@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cosmic Explorer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-rocket me-2"></i>Cosmic Explorer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planets.html">
+                            <i class="fas fa-globe me-1"></i>Planets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exploration.html">
+                            <i class="fas fa-satellite me-1"></i>Exploration
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-star me-3"></i>Welcome to Cosmic Explorer</h1>
+            <p>Journey through the infinite cosmos and discover the wonders of our universe</p>
+            <a href="planets.html" class="btn-cosmic" id="exploreBtn">
+                <i class="fas fa-rocket me-2"></i>Start Exploring
+            </a>
+
+            <div class="solar-system">
+                <div class="sun"></div>
+                <div class="orbit">
+                    <div class="planet" title="Mercury"></div>
+                </div>
+                <div class="orbit">
+                    <div class="planet" title="Venus"></div>
+                </div>
+                <div class="orbit">
+                    <div class="planet" title="Earth"></div>
+                </div>
+                <div class="orbit">
+                    <div class="planet" title="Mars"></div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-item" data-stat="planets">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Planets</div>
+                </div>
+                <div class="stat-item" data-stat="moons">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Known Moons</div>
+                </div>
+                <div class="stat-item" data-stat="missions">
+                    <div class="stat-number">75+</div>
+                    <div class="stat-label">Space Missions</div>
+                </div>
+                <div class="stat-item" data-stat="discoveries">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Discoveries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Create animated starfield
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                const size = Math.random() * 3 + 1;
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const duration = Math.random() * 3 + 2;
+
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = x + 'px';
+                star.style.top = y + 'px';
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = Math.random() * 3 + 's';
+
+                starfield.appendChild(star);
+            }
+        }
+
+        // Add interactive effects to planets
+        document.querySelectorAll('.planet').forEach(planet => {
+            planet.addEventListener('click', function() {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                this.style.background = randomColor;
+                this.style.boxShadow = 0 0 20 px $ {
+                    randomColor
+                };
+            });
+        });
+
+        // Add click effects to stats
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const number = this.querySelector('.stat-number');
+
+                // Animate the number
+                number.style.transform = 'scale(1.2)';
+                number.style.color = '#ff6b9d';
+
+                setTimeout(() => {
+                    number.style.transform = 'scale(1)';
+                    number.style.color = '#00d4ff';
+                }, 200);
+            });
+        });
+
+        // Initialize effects
+        createStarfield();
+    </script>
+</body>
+
+</html>
